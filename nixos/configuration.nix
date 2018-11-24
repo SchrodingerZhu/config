@@ -15,11 +15,16 @@
     dates = "thursday";
   };
 
+  powerManagement.powertop.enable = true;
 
   # Don't start a getty behind my graphical login
   systemd.services."autovt@tty1".enable = false;
 
   ### Random software
+
+  nixpkgs.overlays = [ (self: super:
+    { sarasa-gothic = self.callPackage ./sarasa-gothic.nix {}; }
+  ) ];
 
   environment.systemPackages = with pkgs; [
     ark
@@ -49,6 +54,11 @@
     };
 
     desktopManager.plasma5.enable = true;
+  };
+
+  i18n.inputMethod = {
+    enabled = "fcitx";
+    fcitx.engines = with pkgs.fcitx-engines; [ libpinyin ];
   };
 
   fonts.fonts = with pkgs; [
