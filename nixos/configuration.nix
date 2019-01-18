@@ -13,9 +13,12 @@
   nix.gc = {
     automatic = true;
     dates = "thursday";
+    options = "--delete-older-than 8d";
   };
 
   powerManagement.powertop.enable = true;
+
+  services.printing.enable = true;
 
   # Don't start a getty behind my graphical login
   systemd.services."autovt@tty1".enable = false;
@@ -23,18 +26,25 @@
   ### Random software
 
   nixpkgs.overlays = [ (self: super:
-    { sarasa-gothic = self.callPackage ./sarasa-gothic.nix {}; }
-  ) ];
+    { sarasa-gothic = self.callPackage ./sarasa-gothic.nix {}; }) ];
 
   environment.systemPackages = with pkgs; [
-    ark
-    powertop
-    iotop
     fcitx-configtool
-    python3
   ];
 
   programs.vim.defaultEditor = true;
+
+  programs.mtr.enable = true;
+
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
+
+  programs.ssh = {
+    askPassword = "${pkgs.ksshaskpass}/bin/ksshaskpass";
+    startAgent = true;
+  };
 
   ### Graphical
 
@@ -54,6 +64,8 @@
     };
 
     desktopManager.plasma5.enable = true;
+
+    xkbOptions = "terminate:ctrl_alt_bksp,caps:ctrl_modifier";
   };
 
   i18n.inputMethod = {
@@ -75,15 +87,13 @@
 
   ### Boot and kernel
 
-  boot.extraModulePackages = [
-    config.boot.kernelPackages.exfat-nofuse
-  ];
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.timeout = 0;
 
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = [ "quiet" "i915.fastboot=1" ];
+
+  boot.extraModulePackages = [ config.boot.kernelPackages.exfat-nofuse ];
 
   boot.kernel.sysctl = {
     "vm.swappiness" = 5;
@@ -97,12 +107,15 @@
   networking.hostName = "homura";
   networking.networkmanager.enable = true;
 
+  networking.firewall.allowedTCPPorts = [ 12345 ];
+  networking.firewall.logRefusedConnections = false;
+
   ### Users
 
   users.users.dram = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "vboxusers" "docker" ];
   };
 
   ### Misc
@@ -118,6 +131,8 @@
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+
+  nix.trustedUsers = [ "root" "dram" ];
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
