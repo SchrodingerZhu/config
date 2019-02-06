@@ -1,0 +1,2 @@
+#!/bin/sh
+exec nixos-rebuild -I nixpkgs=$PWD/nixpkgs -I nixos-config=configuration.nix "$@"
