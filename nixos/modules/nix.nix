@@ -16,4 +16,6 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.oraclejdk.accept_license = true;
+
+  nix.nixPath = [ "nixpkgs=/home/dram/code/config/nixos/nixpkgs" ];
 }
