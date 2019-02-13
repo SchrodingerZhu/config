@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+tmpDir=$(mktemp -t -d update-cnf.XXXXXX)
+cleanup() {
+  rm -rf "$tmpDir"
+}
+trap cleanup EXIT
+curl -L https://nixos.org/channels/nixos-18.09/nixexprs.tar.xz \
+  | tar xJ -C "$tmpDir"
+
+if [ $(id -u) -eq 0 ]
+then
+  prefix=
+else
+  prefix=sudo
+fi
+
+$prefix /bin/sh <<END
+mkdir -p /var/lib/command-not-found
+cp "$tmpDir/$(ls $tmpDir)/programs.sqlite" /var/lib/command-not-found
+END
