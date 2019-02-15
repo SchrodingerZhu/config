@@ -17,6 +17,7 @@
   };
 
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.docker.enable = true;
 
   programs.command-not-found.dbPath = "/var/lib/command-not-found/programs.sqlite";
 }
