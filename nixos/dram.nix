@@ -3,6 +3,8 @@
 with pkgs; [
   jetbrains.idea-community
   (pkgs.lib.hiPrio pkgs.whois)
+  (yarn.override { nodejs = nodejs-10_x; })
+  (python3Full.withPackages (p: with p; [ setuptools pip ]))
 
   anki
   ark
@@ -24,13 +26,11 @@ with pkgs; [
   libreoffice
   mathematica
   nodejs-10_x
-  (yarn.override { nodejs = nodejs-10_x; })
   okular
   p7zip
   patchelf
   pciutils
   pinta
-  python3
   socat
   spectacle
   sqliteInteractive
