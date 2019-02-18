@@ -17,7 +17,11 @@
   };
 
   virtualisation.virtualbox.host.enable = true;
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = false;
+    extraOptions = "--registry-mirror=https://registry.docker-cn.com";
+  };
 
   programs.command-not-found.dbPath = "/var/lib/command-not-found/programs.sqlite";
 }
