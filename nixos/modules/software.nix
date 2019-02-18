@@ -20,7 +20,7 @@
   virtualisation.docker = {
     enable = true;
     enableOnBoot = false;
-    extraOptions = "--registry-mirror=https://registry.docker-cn.com";
+    extraOptions = "--registry-mirror=https://docker.mirrors.ustc.edu.cn";
   };
 
   programs.command-not-found.dbPath = "/var/lib/command-not-found/programs.sqlite";
