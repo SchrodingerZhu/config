@@ -17211,6 +17211,8 @@ with pkgs;
 
   jgmenu = callPackage ../applications/misc/jgmenu { };
 
+  jgrasp = callPackage ../applications/editors/jgrasp {};
+
   jigdo = callPackage ../applications/misc/jigdo { };
 
   jitsi = callPackage ../applications/networking/instant-messengers/jitsi { };
