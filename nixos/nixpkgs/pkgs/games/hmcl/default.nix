@@ -25,7 +25,5 @@ in stdenvNoCC.mkDerivation rec {
     makeWrapper ${oraclejre}/bin/java $out/bin/hmcl \
       --add-flags "-jar $out/share/HMCL.jar" \
       --suffix LD_LIBRARY_PATH : ${libPath}
-    makeWrapper ${stdenvNoCC.shell} $out/bin/hmcl-run \
-      --suffix LD_LIBRARY_PATH : ${libPath}
   '';
 }
