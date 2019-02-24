@@ -11,6 +11,7 @@ with pkgs; [
   bat
   bind
   binutils
+  cloc
   chromium
   ffmpeg-full
   file
@@ -24,8 +25,10 @@ with pkgs; [
   kdeconnect
   libarchive
   libreoffice
+  lrzsz
   mathematica
   nodejs-10_x
+  obs-studio
   okular
   p7zip
   patchelf
