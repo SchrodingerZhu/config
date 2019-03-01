@@ -19,6 +19,7 @@ let
       buildInputs = [ xorg.libXt ];
 
       buildPhase = ''
+        patchShebangs .
         cd src
         ./configure
         ./Make.sh
@@ -52,8 +53,8 @@ in stdenvNoCC.mkDerivation rec {
   phases = [ "installPhase" ];
   installPhase = ''
     mkdir -p $out/bin
-    makeWrapper ${jre}/bin/java $out/bin/jgrasp \
-      --add-flags "-jar $jgraspPrebuilt/jgrasp.jar"
+    makeWrapper $jgraspPrebuilt/bin/jgrasp $out/bin/jgrasp \
+      --suffix PATH : "${jre}/bin"
 
     mkdir -p $out/share/applications
     cp ${jgraspDesktop}/share/applications/* $out/share/applications
