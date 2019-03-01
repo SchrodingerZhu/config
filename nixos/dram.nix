@@ -37,6 +37,7 @@ with pkgs; [
   socat
   spectacle
   sqliteInteractive
+  stack
   tdesktop
   telnet
   tree
