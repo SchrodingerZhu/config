@@ -22366,6 +22366,8 @@ with pkgs;
 
   maphosts = callPackage ../tools/networking/maphosts {};
 
+  zh-filename-fixer = callPackage ../misc/zh-filename-fixer {};
+
   zimg = callPackage ../development/libraries/zimg { };
 
   zk-shell = callPackage ../applications/misc/zk-shell { };
