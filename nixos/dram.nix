@@ -5,6 +5,8 @@ with pkgs; [
   (yarn.override { nodejs = nodejs-10_x; })
   (python3Full.withPackages (p: with p; [ setuptools pip ]))
 
+  zh-filename-fixer
+
   anki
   ark
   bat
