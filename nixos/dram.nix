@@ -1,7 +1,6 @@
 { pkgs }:
 
 with pkgs; [
-  jetbrains.idea-community
   (pkgs.lib.hiPrio pkgs.whois)
   (yarn.override { nodejs = nodejs-10_x; })
   (python3Full.withPackages (p: with p; [ setuptools pip ]))
