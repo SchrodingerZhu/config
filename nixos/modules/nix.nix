@@ -7,7 +7,7 @@
     options = "--delete-older-than 8d";
   };
 
-  nix.trustedUsers = [ "root" "dram" ];
+  nix.trustedUsers = [ "root" "yacat" ];
 
   nix.extraOptions = ''
     keep-outputs = true

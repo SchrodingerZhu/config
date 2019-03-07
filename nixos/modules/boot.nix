@@ -2,6 +2,8 @@
 
 {
   boot = {
+
+
     earlyVconsoleSetup = true;
 
     loader.systemd-boot.enable = true;
@@ -9,8 +11,8 @@
 
     loader.efi.canTouchEfiVariables = true;
     kernelParams = [ "quiet" "i915.fastboot=1" ];
-
-    extraModulePackages = [ config.boot.kernelPackages.exfat-nofuse ];
+    kernelPackages = pkgs.kernelPackages.testing;
+    extraModulePackages = [ pkgs.kernelPackages_testing.exfat-nofuse ];
 
     kernel.sysctl = {
       "vm.swappiness" = 5;
